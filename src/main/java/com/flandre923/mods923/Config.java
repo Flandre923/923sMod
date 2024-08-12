@@ -1,4 +1,4 @@
-package com.example.examplemod;
+package com.flandre923.mods923;
 
 import java.util.List;
 import java.util.Set;
