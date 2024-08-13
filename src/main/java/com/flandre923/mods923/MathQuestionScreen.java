@@ -1,5 +1,6 @@
 package com.flandre923.mods923;
 
+import com.flandre923.mods923.network.packet.c2s.MathQuestionAnswerMessage;
 import com.sun.jna.platform.unix.solaris.Kstat2StatusException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -10,6 +11,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.BeaconScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -42,6 +44,7 @@ public class MathQuestionScreen extends Screen {
             MathQuestionScreen.this.seconds--;
             if (MathQuestionScreen.this.seconds<=0){
                 MathQuestionScreen.this.player.closeContainer();
+                PacketDistributor.sendToServer(new MathQuestionAnswerMessage(player.getId(),player.getUUID(),mathQuestion.getDifficulty(),mathQuestion.getId(),-1));
                 MathQuestionScreen.this.executorService.shutdown();
             }
         },0,1, TimeUnit.SECONDS);
@@ -90,6 +93,7 @@ public class MathQuestionScreen extends Screen {
             //  if fail reset attack counter
             //  and reset laskTick
             player.closeContainer();
+            PacketDistributor.sendToServer(new MathQuestionAnswerMessage(player.getId(),player.getUUID(),mathQuestion.getDifficulty(),mathQuestion.getId(),mathQuestion.getOptions().get(indexOfAnswer).getId()));
             // close timer
             if(!MathQuestionScreen.this.executorService.isShutdown()){
                 MathQuestionScreen.this.executorService.shutdown();

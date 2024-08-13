@@ -14,6 +14,8 @@ public class AttackCounter {
     public UUID uuid;
     public int lastTick;
     public int attackCount;
+    public boolean isMutiDmage;
+    public boolean isHurtPlayer;
 
     public AttackCounter(Player player) {
         this.player = player;
@@ -21,6 +23,8 @@ public class AttackCounter {
         this.uuid = player.getUUID();
         this.lastTick = player.tickCount;
         this.attackCount = 1;
+        this.isMutiDmage = false;
+        this.isHurtPlayer = false;
     }
 
 
@@ -56,4 +60,30 @@ public class AttackCounter {
     public void increaseAttack() {
         this.attackCount++;
     }
+
+    public void setIsMutiDmage(boolean isMutiDmage){
+        this.isMutiDmage = isMutiDmage;
+    }
+    public void setIsHurtPlayer(boolean isHurtPlayer){
+        this.isHurtPlayer = isHurtPlayer;
+    }
+
+    public boolean isMutiDmage(){
+        return this.isMutiDmage;
+    }
+
+    public boolean isHurtPlayer(){
+        return this.isHurtPlayer;
+    }
+
+    public void resetAttackCount(){
+        this.attackCount = 0;
+        this.setLastTick(this.player.tickCount);
+    }
+
+    public void resetFlag(){
+        this.setIsMutiDmage(false);
+        this.setIsHurtPlayer(false);
+    }
+
 }
