@@ -1,5 +1,7 @@
 package com.flandre923.mods923;
 
+import com.flandre923.mods923.mathQuestion.MathQuestion;
+import com.flandre923.mods923.mathQuestion.StringMathQuestion;
 import com.flandre923.mods923.network.packet.s2c.OpenScreenS2C;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -35,14 +37,9 @@ public class PlayerAttackBehavior {
 
     public static void postAttackCounter(Player player){
         if(isTen(player)){
-            // qeustion
-            ExampleMod.LOGGER.warn(MathQuestionRegistries.mathQuestionMap.get(1).get(0).getQuestion() );
-            // answer
-            ExampleMod.LOGGER.warn(MathQuestionRegistries.mathQuestionMap.get(1).get(0).getCorrectAnswer().toString() );
-            //
             if (!player.level().isClientSide){
 //                openGui(player,MathQuestionRegistries.mathQuestionMap.get(1).get(0));
-                PacketDistributor.sendToPlayer((ServerPlayer) player,new OpenScreenS2C(1,0));
+                PacketDistributor.sendToPlayer((ServerPlayer) player,new OpenScreenS2C(1,1));
             }
 
         }
@@ -69,7 +66,7 @@ public class PlayerAttackBehavior {
     }
 
     public static void openGui(int difficulty,int mathQuestionID){
-        MathQuestion mathQuestion = MathQuestionRegistries.mathQuestionMap.get(difficulty).get(mathQuestionID);
+        MathQuestion<?> mathQuestion = MathQuestionRegistries.mathQuestionMap.get(difficulty).get(mathQuestionID);
         Minecraft.getInstance().setScreen(new MathQuestionScreen(Component.literal("Math Question"),mathQuestion,10));
     }
 

@@ -1,16 +1,18 @@
 package com.flandre923.mods923;
 
+import com.flandre923.mods923.mathQuestion.MathQuestion;
+import com.flandre923.mods923.mathQuestion.StringMathQuestion;
+import com.flandre923.mods923.mathQuestion.TextureMathQuestion;
 import com.flandre923.mods923.network.packet.c2s.MathQuestionAnswerMessage;
-import com.sun.jna.platform.unix.solaris.Kstat2StatusException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.screens.inventory.BeaconScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.concurrent.Executors;
@@ -19,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MathQuestionScreen extends Screen {
 
-    public final MathQuestion mathQuestion;
+    public final MathQuestion<?> mathQuestion;
     public int seconds;
     public final LocalPlayer player;
 
@@ -28,7 +30,7 @@ public class MathQuestionScreen extends Screen {
 
     public ScheduledExecutorService executorService;
 
-    protected MathQuestionScreen(Component title,MathQuestion mathQuestion,int seconds) {
+    protected MathQuestionScreen(Component title, MathQuestion<?> mathQuestion, int seconds) {
         super(title);
         this.mathQuestion = mathQuestion;
 
@@ -37,6 +39,7 @@ public class MathQuestionScreen extends Screen {
         this.seconds = seconds;
 
         player = Minecraft.getInstance().player;
+
 
         this.executorService = Executors.newSingleThreadScheduledExecutor();
 
@@ -70,15 +73,23 @@ public class MathQuestionScreen extends Screen {
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
 
-        guiGraphics.drawCenteredString(this.font,String.valueOf(this.seconds),this.width/2-10,40,0xFFFFFF);
-        guiGraphics.drawCenteredString(this.font,mathQuestion.getQuestion(),this.width/2-10,60,0xFFFFFF);
+        if( mathQuestion instanceof  StringMathQuestion stringMathQuestion){
+            guiGraphics.drawCenteredString(this.font,String.valueOf(this.seconds),this.width/2-10,40,0xFFFFFF);
+            guiGraphics.drawCenteredString(this.font,stringMathQuestion.getQuestion(),this.width/2-10,60,0xFFFFFF);
+
+        }else if (mathQuestion instanceof TextureMathQuestion textureMathQuestion){
+            guiGraphics.blit(textureMathQuestion.getQuestion(), textureMathQuestion.getStartX(),textureMathQuestion.getStartY(),
+                    0.0F, 0.0F, textureMathQuestion.getWidth(), textureMathQuestion.getHeight(), textureMathQuestion.getWidth(), textureMathQuestion.getHeight());
+
+        }
+
     }
 
     class Button extends AbstractButton{
 
-        MathQuestion mathQuestion;
+        MathQuestion<?> mathQuestion;
         int indexOfAnswer;
-        public Button(int x, int y, int width, int height,int indexOfAnswer,MathQuestion mathQuestion) {
+        public Button(int x, int y, int width, int height, int indexOfAnswer, MathQuestion<?> mathQuestion) {
             super(x, y, width, height, Component.literal(mathQuestion.getOptions().get(indexOfAnswer).getContent()));
             this.mathQuestion = mathQuestion;
             this.indexOfAnswer = indexOfAnswer;

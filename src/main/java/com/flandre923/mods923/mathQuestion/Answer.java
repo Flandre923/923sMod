@@ -1,4 +1,4 @@
-package com.flandre923.mods923;
+package com.flandre923.mods923.mathQuestion;
 
 public class Answer {
     public int id;

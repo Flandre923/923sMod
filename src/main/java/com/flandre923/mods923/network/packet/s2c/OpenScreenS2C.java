@@ -39,7 +39,7 @@ public class OpenScreenS2C implements CustomPacketPayload {
     public static void handle(OpenScreenS2C data, IPayloadContext context)
     {
         context.enqueueWork(()->{
-            PlayerAttackBehavior.openGui(data.mathQuestionID,data.difficulty);
+            PlayerAttackBehavior.openGui(data.difficulty,data.mathQuestionID);
         });
     }
 

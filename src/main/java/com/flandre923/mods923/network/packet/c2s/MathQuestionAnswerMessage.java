@@ -1,6 +1,9 @@
 package com.flandre923.mods923.network.packet.c2s;
 
 import com.flandre923.mods923.*;
+import com.flandre923.mods923.mathQuestion.Answer;
+import com.flandre923.mods923.mathQuestion.MathQuestion;
+import com.flandre923.mods923.mathQuestion.StringMathQuestion;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -8,7 +11,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 public class MathQuestionAnswerMessage implements CustomPacketPayload {
@@ -57,8 +59,8 @@ public class MathQuestionAnswerMessage implements CustomPacketPayload {
         context.enqueueWork(()->{
 
             // server
-            List<MathQuestion> mathQuestions = MathQuestionRegistries.mathQuestionMap.get(data.diffculty);
-            MathQuestion mathQuestion = mathQuestions.get(data.MathQuestionID);
+            List<MathQuestion<?>> mathQuestions = MathQuestionRegistries.mathQuestionMap.get(data.diffculty);
+            MathQuestion<?> mathQuestion = mathQuestions.get(data.MathQuestionID);
             Answer correctAnswer = mathQuestion.getCorrectAnswer();
             boolean isCorrect = data.answerID == correctAnswer.id;
             if (isCorrect){

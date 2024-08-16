@@ -19,6 +19,7 @@ public class PlayerOnAttackEvent {
                 PlayerAttackBehavior.resetFlag(player);
             }else if (PlayerAttackBehavior.isPlayerHurt(player)){
                 //todo math hurt
+                player.getAbilities().invulnerable = false;
                 player.hurt(player.damageSources().source(DamageTypes.MAGIC),PlayerAttackBehavior.getHurtDamage());
                 PlayerAttackBehavior.resetFlag(player);
             }
