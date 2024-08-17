@@ -1,5 +1,6 @@
-package com.flandre923.mods923;
+package com.flandre923.mods923.setup;
 
+import com.flandre923.mods923.ExampleMod;
 import com.flandre923.mods923.mathQuestion.Answer;
 import com.flandre923.mods923.mathQuestion.MathQuestion;
 import com.flandre923.mods923.mathQuestion.StringMathQuestion;

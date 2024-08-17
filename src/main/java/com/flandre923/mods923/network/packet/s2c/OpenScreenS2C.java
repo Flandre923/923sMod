@@ -1,9 +1,7 @@
 package com.flandre923.mods923.network.packet.s2c;
 
-import com.flandre923.mods923.AttackCounter;
 import com.flandre923.mods923.ExampleMod;
-import com.flandre923.mods923.MathQuestionRegistries;
-import com.flandre923.mods923.PlayerAttackBehavior;
+import com.flandre923.mods923.attack_counter.PlayerAttackBehavior;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;

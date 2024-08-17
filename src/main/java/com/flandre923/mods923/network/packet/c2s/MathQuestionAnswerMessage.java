@@ -1,9 +1,10 @@
 package com.flandre923.mods923.network.packet.c2s;
 
 import com.flandre923.mods923.*;
+import com.flandre923.mods923.attack_counter.PlayerAttackBehavior;
 import com.flandre923.mods923.mathQuestion.Answer;
 import com.flandre923.mods923.mathQuestion.MathQuestion;
-import com.flandre923.mods923.mathQuestion.StringMathQuestion;
+import com.flandre923.mods923.setup.MathQuestionRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;

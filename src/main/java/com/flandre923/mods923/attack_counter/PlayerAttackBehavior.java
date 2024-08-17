@@ -1,8 +1,9 @@
-package com.flandre923.mods923;
+package com.flandre923.mods923.attack_counter;
 
+import com.flandre923.mods923.MathQuestionScreen;
 import com.flandre923.mods923.mathQuestion.MathQuestion;
-import com.flandre923.mods923.mathQuestion.StringMathQuestion;
 import com.flandre923.mods923.network.packet.s2c.OpenScreenS2C;
+import com.flandre923.mods923.setup.MathQuestionRegistries;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;

@@ -1,6 +1,6 @@
-package com.flandre923.mods923;
+package com.flandre923.mods923.attack_counter;
 
-import net.minecraft.world.damagesource.DamageSource;
+import com.flandre923.mods923.ExampleMod;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -18,7 +18,6 @@ public class PlayerOnAttackEvent {
                 event.setNewDamage(event.getOriginalDamage() * PlayerAttackBehavior.getAttackMuti());
                 PlayerAttackBehavior.resetFlag(player);
             }else if (PlayerAttackBehavior.isPlayerHurt(player)){
-                //todo math hurt
                 player.getAbilities().invulnerable = false;
                 player.hurt(player.damageSources().source(DamageTypes.MAGIC),PlayerAttackBehavior.getHurtDamage());
                 PlayerAttackBehavior.resetFlag(player);

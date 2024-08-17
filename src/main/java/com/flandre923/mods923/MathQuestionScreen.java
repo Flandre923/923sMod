@@ -12,7 +12,6 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.concurrent.Executors;
@@ -30,7 +29,7 @@ public class MathQuestionScreen extends Screen {
 
     public ScheduledExecutorService executorService;
 
-    protected MathQuestionScreen(Component title, MathQuestion<?> mathQuestion, int seconds) {
+    public MathQuestionScreen(Component title, MathQuestion<?> mathQuestion, int seconds) {
         super(title);
         this.mathQuestion = mathQuestion;
 

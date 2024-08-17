@@ -1,6 +1,5 @@
-package com.flandre923.mods923;
+package com.flandre923.mods923.attack_counter;
 
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
